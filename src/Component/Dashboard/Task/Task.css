@@ -1,0 +1,193 @@
+.task-container {
+    margin: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: auto; 
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.task-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.pending {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 7px;
+    width: 100%;
+    text-indent: 10px;
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    color: rgb(255, 255, 255) !important;
+    border-radius: 10px 10px 0px 0px;
+    background-color: rgb(237, 116, 116);
+}
+.completed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 7px;
+    width: 100%;
+    text-indent: 10px;
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    color: rgb(255, 255, 255) !important;
+    border-radius: 10px 10px 0px 0px;
+    background-color: rgb(58, 220, 58);
+}
+
+.task-top {
+    margin-top: 30px;
+    width: 100%;
+}
+.task-top p {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: start;
+    color: #333333;
+    margin: 0;
+}
+
+.task-complete-confirm-div{
+    height: 100%;
+    width: 100%;  
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    overflow: hidden;
+}
+.task-complete-confirm{
+    height: 80%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: 700;
+    color: gray;
+    font-size: 20px;
+    align-items: center;
+}
+.task-complete-confirm-buttons{
+    display: flex;
+    gap: 30px;
+}
+.task-complete-confirm-buttons-1{
+    background-color: rgb(225, 65, 65);
+    font-size: 15px;
+    height: 40px;
+    width: 100px;
+    font-weight: 700;
+    border: none;
+    outline: none;
+    color: white;
+    border-radius: 7px;
+}
+.task-complete-confirm-buttons-2{
+    background-color: rgb(34, 149, 34);
+    font-size: 15px;
+    height: 40px;
+    width: 100px;
+    font-weight: 700;
+    border: none;
+    outline: none;
+    color: white;
+    border-radius: 7px;
+}
+.task-complete-div {
+    text-align: center;
+    margin: 15px 0;
+    display: flex;
+    justify-content: end;
+}
+.task-complete {
+    background-color: rgb(14, 190, 14);
+    color: #ffffff;
+    border-radius: 7px;
+    height: 35px;
+    width: 120px;
+    border: none;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.task-complete:hover {
+    background-color: rgb(10, 150, 10);
+}
+
+.task-bottom {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 15px;
+    margin-top: auto;
+}
+.task-bottom p {
+    font-size: 14px;
+    font-weight: 600;
+    color: #555555;
+    cursor: default;
+    flex: 1;
+    margin: 0;
+}
+.task-manager {
+    font-size: 14px;
+    color: #888888;
+    text-align: right;
+}
+@media (max-width: 426px) {
+    .task-container{
+        width: 360px;
+    }
+}
+@media (max-width: 376px) {
+    .task-container{
+        width: 320px;
+        border-radius: 10px;
+        position: relative;
+    }
+    .task-top {
+        margin-top: 30px;
+        width: 100%;
+    }
+    .task-top p {
+        font-size: 18px;
+    }
+    .task-bottom{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+@media (max-width: 321px) {
+    .task-container{
+        width: 290px;
+        border-radius: 10px;
+        position: relative;
+    }
+    .task-top {
+        margin-top: 30px;
+        width: 100%;
+    }
+    .task-top p {
+        font-size: 18px;
+    }
+    .task-bottom{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

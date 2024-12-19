@@ -1,0 +1,103 @@
+.sidebar {
+    height: 100%;
+    width: 100%;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    background-color: #34495E; /* Fallback for consistent look */
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar_top {
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: #34495E;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.sidebar_bottom {
+    flex: 1; /* Takes the remaining space */
+    background-color: #2C3E50;
+    position: relative;
+    overflow-y: auto; /* Allows scrolling for overflow content */
+}
+
+.sidebar_bottom p {
+    margin: 0;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    border-bottom: 0.5px solid black;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+/* .logout{
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    outline: none;
+} */
+.sidebar_bottom p:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    transform: scale(1.05); /* Subtle scale effect for better UX */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+    }
+    .sidebar_top {
+        font-size: 20px;
+        /* height: 40%; */
+    }
+    .sidebar_bottom p {
+        font-size: 16px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 426px) {
+    .sidebar {
+        width: 100%;
+        height: 100% !important;
+    }
+    .sidebar_top {
+        height: 60%;
+        font-size: 18px;
+
+    }
+    .sidebar_bottom{
+        height: 40%;
+        display: flex;
+        gap: 20px;
+    }
+    .sidebar_bottom p {
+        font-size: 16px;
+        padding: 8px;
+        margin-left: 20px;
+    }
+    .logout{
+        position: absolute;
+        right: 10px;
+        top: 0;
+        height: 100%;
+    }
+}
+@media (max-width: 321px) {
+    .sidebar_bottom{
+        gap: 10px;
+    }
+    .sidebar_bottom p {
+        font-size: 16px;
+        padding: 8px;
+        margin-left: 10px;
+    }
+}

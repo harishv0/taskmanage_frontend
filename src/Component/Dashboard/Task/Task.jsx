@@ -17,7 +17,7 @@ const dateRemain = (enddate) => {
   
 };
 const fetchuser = async() => {
-  const response = await axiosConfig.get("handletask.php",{
+  const response = await axiosConfig.get("/handletask.php",{
     params:{
       action:'fetchuserbyid',
       userid: Cookies.get('userid')

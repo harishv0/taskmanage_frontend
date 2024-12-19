@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { IoIosArrowDroprightCircle } from "react-icons/io"
 import Cookies from 'js-cookie';
+import axiosConfig from '../../../Api/axiosConfig';
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true)
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ const handleSignup = (e) => {
 const handleSignupnSubmit = async() => {
   try {
     if(signupField.name !== '' && signupField.mail !== "" && signupField.password !== ""){
-      const response = await axios.post("http://localhost/taskmanagement/backend/signup.php", {
+      const response = await axiosConfig.post("/signup.php", {
         name: signupField.name,
         mail: signupField.mail,
         password: signupField.password
@@ -57,7 +58,7 @@ const handleSignupnSubmit = async() => {
 
 const handleLoginSubmit = async() => {
   try {
-    const response = await axios.get("http://localhost/taskmanagement/backend/login.php", {
+    const response = await axiosConfig.get("/login.php", {
       params: {
         mail: loginField.mail,
         password: loginField.password

@@ -44,7 +44,7 @@ const Dashboard = () => {
   const handleSubmitTask = async() => {
     try {
       if(taskData.assignto !== '' && taskData.enddate !== '' && taskData.taskname !== ''){
-        const response = await axiosConfig.post("http://localhost/taskmanagement/backend/handletask.php",{
+        const response = await axiosConfig.post("/handletask.php",{
           action: "addtask", 
           data: {
             taskname: taskData.taskname,
@@ -73,7 +73,7 @@ const Dashboard = () => {
 
   const getAllTask = async() => {
     try {
-      const response = await axios.get("http://localhost/taskmanagement/backend/handletask.php",{
+      const response = await axiosConfig.get("/handletask.php",{
         params:{
           action : "getalltask",
         }

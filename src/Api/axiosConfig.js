@@ -1,5 +1,7 @@
 import axios from "axios";
 export default axios.create({
-    baseURL:'http://taskmanage.ct.ws'
+    baseURL:'https://taskmanage-php.onrender.com',
 })
-//http://localhost/taskmanagement/backend
+//http://localhost/backend
+//http://taskmanage.ct.ws
+// https://taskmanage-php.onrender.com

@@ -3,6 +3,7 @@ import './SIdeBar.css'
 import Cookies from 'js-cookie'
 import axiosConfig from '../../Api/axiosConfig'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 const SideBar = () => {
   const [user, setuser] = useState('')
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const SideBar = () => {
   const handleLogout = () => {
     Cookies.remove('userid');
     navigate('/')
+    toast.success("Logout successfully")
   }
   
   useEffect(()=>{

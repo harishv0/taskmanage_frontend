@@ -5,6 +5,7 @@ import Task from './Task/Task'
 import axios from 'axios'
 import axiosConfig from '../../Api/axiosConfig'
 import Cookies from 'js-cookie'
+import { toast } from 'react-toastify'
 
 const Dashboard = () => {
   const [isAddTask, setisAddTask] = useState(false)
@@ -13,9 +14,23 @@ const Dashboard = () => {
     taskname:"",
     assignto:"",
     enddate:"",
-    taskby: user?.name
+    taskby: ""
   })
   const [datas, setDatas] = useState([])
+  
+  const datavalidation = (datevalue) => {
+    const currdate = new Date();
+    const newdate = new Date(datevalue);
+  
+    const difftime = newdate - currdate;
+    const diffdate = (difftime/(1000*60*60*24))
+    
+    if(diffdate >= 0){
+      return true;
+    }else{
+      return false;
+    }
+  }
 
   const fetchuserbyid = async() => {
     const response = await axiosConfig.get("/handletask.php",{
@@ -44,29 +59,35 @@ const Dashboard = () => {
   const handleSubmitTask = async() => {
     try {
       if(taskData.assignto !== '' && taskData.enddate !== '' && taskData.taskname !== ''){
-        const response = await axiosConfig.post("/handletask.php",{
-          action: "addtask", 
-          data: {
-            taskname: taskData.taskname,
-            assignto: taskData.assignto,
-            enddate: taskData.enddate,
-            taskby: "Manager"
-          }
-        }, {
-          headers: {
-            "Content-Type": "application/json"
-          }
-        })
-        console.log(response.data);
+        if(datavalidation(taskData.enddate)){
+          const response = await axiosConfig.post("/handletask.php",{
+            action: "addtask", 
+            data: {
+              taskname: taskData.taskname,
+              assignto: taskData.assignto,
+              enddate: taskData.enddate,
+              taskby: user?.name
+            }
+          }, {
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+          toast.info(response.data.message);
+          
+          settaskData("");
+          setisAddTask(false);
+          getAllTask();
+        }else{
+          // console.log("Give a valid date");
+          toast.error("Give a valid date")
+        }
         
-        settaskData("");
-        setisAddTask(false);
-        getAllTask();
       }else{
-        console.log("Fill the Field");
+        toast.error("Fill the Field");
       }
     } catch (error) {
-      
+      console.error(error);
     }
   }
   
@@ -97,9 +118,18 @@ const Dashboard = () => {
         name: name,
       }
     })
-    console.log(response.data);
+    // console.log(response.data);
     setDatas(response.data.data)
   }
+  // useEffect(() => {
+  //   if (user?.name) {
+  //     settaskData((prevData) => ({
+  //       ...prevData,
+  //       taskby: user.name
+  //     }));
+  //   }
+  // }, [user]);
+
   useEffect(()=>{
     fetchuserbyid();
   },[])

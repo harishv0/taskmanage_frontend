@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Task.css'
 import Cookies from 'js-cookie'
 import axiosConfig from '../../../Api/axiosConfig'
+import { toast } from 'react-toastify'
 const Task = ({data, onStatusChange}) => {
 const [user, setuser] = useState('')
 const [remainingDays, setRemainingDays] = useState(null);
@@ -13,9 +14,10 @@ const dateRemain = (enddate) => {
   const diffTime = end - curr;
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   setRemainingDays(diffDays);
-  console.log(diffDays);
+  // console.log(diffDays);
   
 };
+
 const fetchuser = async() => {
   const response = await axiosConfig.get("/handletask.php",{
     params:{
@@ -36,26 +38,56 @@ const taskStatusUpdate = async(taskid) => {
       "Content-Type" : "application/json"
     }
 })
-  console.log(response.data);
+  // console.log(response.data);
   setIscomplete(false)
+  toast.success(response.data.message)
   onStatusChange({name: user?.name})
 }
 
-useEffect(()=>{
-  fetchuser();
-  if (data?.enddate) {
-    dateRemain(data.enddate);
+const isExpired = async(taskid) => {
+  if(remainingDays <= 0){
+    if(data?.status !== "EXPIRED" && data?.status !== 'COMPLETED'){
+      const response = await axiosConfig.post("/handletask.php",{
+        action: "taskstatusupdate",
+        taskid: taskid,
+        newstatus: "EXPIRED"
+      },{
+        headers:{
+          "Content-Type" : "application/json"
+        }
+      })
+      // console.log(response.data);
+      // onStatusChange({name: user?.name})
+      }
+    }
   }
-},[data?.enddate])
+
+  useEffect(() => {
+    fetchuser();
+  }, []); 
+
+  useEffect(()=>{
+    if (data?.enddate) {
+      dateRemain(data.enddate);
+    }
+  },[data?.enddate])
+
+
+  useEffect(() => {
+    if (remainingDays !== null) {
+      isExpired(data?.taskid);
+    }
+  }, [remainingDays]);
+
   return (
     <div className='task-container'>
         <div className='task-top'>
-            <p className={ `${data?.status === 'PENDING' ? 'pending' : 'completed'}`}>{data?.status}</p>
+            <p className={ `${data?.status === 'PENDING' ? 'pending' : data?.status === 'COMPLETED' ? 'completed': 'expired' }`}>{data?.status}</p>
             <p>{data?.taskname}</p>
         </div>
         <div className='task-complete-div'>
           {
-            user?.role === 'employee' && data?.status !== 'COMPLETED' && 
+            user?.role === 'employee' && data?.status !== 'COMPLETED' && data?.status !== 'EXPIRED' &&
             <button className='task-complete' onClick={()=>setIscomplete(true)}>Complete</button>
           }
           {iscomplete &&

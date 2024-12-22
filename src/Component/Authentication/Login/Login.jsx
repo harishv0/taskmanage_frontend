@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { IoIosArrowDroprightCircle } from "react-icons/io"
 import Cookies from 'js-cookie';
 import axiosConfig from '../../../Api/axiosConfig';
+import { toast } from 'react-toastify';
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true)
   const navigate = useNavigate();
@@ -43,13 +44,13 @@ const handleSignupnSubmit = async() => {
           "Content-Type": "application/json"
         }
       });
-      console.log(response.data);
-      setsignupField({ name: '', mail: '', password: '' });
+      // console.log(response.data);
+      setsignupField({ name: '', mail: '', password: ''});
       setIsLogin(true)
+      toast.success("Signup Successfully")
     }
     else{
-      console.log("Fill the field");
-      
+      toast.info("Fill the field");
     }
   } catch (error) {
     console.error("Error during signup:", error);
@@ -64,16 +65,19 @@ const handleLoginSubmit = async() => {
         password: loginField.password
       },
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       }
+    
     });
-    console.log(response.data);
+    // console.log(response.data);
     
     if (response.data.message === "Login successful") {
-      console.log(response.data.data.userid);
       const data = response.data
       Cookies.set('userid',data?.data?.userid)
+      toast.success(response.data.message)
       navigate('/dashboard');
+    }else{
+      toast.error(response.data.message)
     }
   } catch (error) {
     console.error("Error during login:", error);

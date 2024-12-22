@@ -43,6 +43,19 @@
     background-color: rgb(58, 220, 58);
 }
 
+.expired{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 7px;
+    width: 100%;
+    text-indent: 10px;
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    color: rgb(255, 255, 255) !important;
+    border-radius: 10px 10px 0px 0px;
+    background-color: rgb(54, 87, 221);
+}
 .task-top {
     margin-top: 30px;
     width: 100%;

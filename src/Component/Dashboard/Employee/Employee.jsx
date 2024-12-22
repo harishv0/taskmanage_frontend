@@ -13,7 +13,7 @@ const Employee = () => {
       }
     });
     setAllusers(response.data.data);
-    console.log(response.data);
+    // console.log(response.data);
   }
 
   useEffect(() => {

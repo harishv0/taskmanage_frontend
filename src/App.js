@@ -5,10 +5,12 @@ import Dashboard from './Component/Dashboard/Dashboard';
 import SideBar from './Component/Dashboard/SideBar';
 import Task from './Component/Dashboard/Task/Task';
 import Employee from './Component/Dashboard/Employee/Employee';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
     <div className="App">
+      <ToastContainer/>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Login/>}/>

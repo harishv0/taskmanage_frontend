@@ -105,7 +105,7 @@ const isExpired = async(taskid) => {
           }
         </div>
         <div className='task-bottom'>
-            <p>{remainingDays !== null && remainingDays >= 0
+            <p>{remainingDays !== null && remainingDays > 0
             ? `Remaining Days: ${remainingDays}`
             : `Expired ${Math.abs(remainingDays)} days ago`}</p>
             <p>{data?.assignto}</p>
